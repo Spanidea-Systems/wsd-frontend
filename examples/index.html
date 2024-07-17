@@ -702,6 +702,21 @@
                     cameraName: cameraName,
                     uuid: uuid,
                 };
+
+                let accessKey = document.getElementById('accessKey').value;
+                let secretAccessKeyId = document.getElementById('secretAccessKeyId').value;
+                let channelName = document.getElementById('channelName1').value;
+                let region = document.getElementById('awsRegion').value;
+
+                const creds = {
+                    accessKey,
+                    secretAccessKeyId,
+                    cameraName: channelName,
+                    region
+                }
+
+                localStorage.setItem('creds', JSON.stringify(creds));
+                
                 storedDevices = storedDevices.filter(device => device.uuid !== uuid);
                 storedDevices.unshift(formData);
                 localStorage.setItem('connectedDevices', JSON.stringify(storedDevices));
