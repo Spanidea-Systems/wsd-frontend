@@ -45,16 +45,18 @@ function getUrlParam(name) {
 const getUuid = getUrlParam('uuid');
 
 async function startViewer(localView, remoteView, formValues, onStatsReport, credential, onRemoteDataMessage) {
+
+    const localData = localStorage.getItem('creds')
+    credential = JSON.parse(localData)
+    
     try {
      
         viewer.localView = localView;
         viewer.remoteView = remoteView;
-        formValues.region = 'us-west-2';
-        formValues.accessKeyId = "";
-        formValues.secretAccessKey = "";
-       // formValues.sessionToken = credential.sessionToken;
-        // formValues.channelName = '';
-        formValues.channelName = "";
+        formValues.region = credential.region;
+        formValues.accessKeyId = credential.accessKey;
+        formValues.secretAccessKey = credential.secretAccessKeyId ;
+        formValues.channelName = credential.cameraName;
         
         if (formValues.enableDQPmetrics) {
             viewerButtonPressed = new Date();
